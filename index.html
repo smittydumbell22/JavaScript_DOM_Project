@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <!-- Include React and ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- Include Babel for JSX transpiling -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // Define the Header component that accepts a title prop
+      function Header({ title }) {
+        return <h1>{title ? title : 'Default title'}</h1>;
+      }
+
+      // Define the HomePage component that uses the Header component and displays a list
+      function HomePage() {
+        // State to track the number of likes
+        const [likes, setLikes] = React.useState(0);
+        
+        // Handle button click to increment likes
+        function handleClick() {
+          setLikes(likes + 1);
+        }
+
+        // List of names to display
+        const names = ['Ada Lovelace', 'Grace Hopper', 'Margaret Hamilton'];
+
+        return (
+          <div>
+            <Header title="Develop. Preview. Ship." />
+            <ul>
+              {names.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+            <button onClick={handleClick}>Likes ({likes})</button>
+          </div>
+        );
+      }
+
+      // Create a root element and render the HomePage component
+      const app = document.getElementById('app');
+      const root = ReactDOM.createRoot(app);
+      root.render(<HomePage />);
+    </script>
+  </body>
+</html>
